@@ -1,89 +1,145 @@
 import type { Barril, DB, Producto, Promocion } from "../types";
 import { productosCervezaDeBarriles } from "../lib/menu";
 
-// --- Importación de Imágenes desde la carpeta imagenes ---
-const papasJamonImage = new URL("../../imagenes/papajamon.jpg", import.meta.url).href;
-const pashaMoImage = new URL("../../imagenes/pajamo.jpg", import.meta.url).href;
-const carnes1Image = new URL("../../imagenes/carnes1.jpg", import.meta.url).href;
-const carnes2Image = new URL("../../imagenes/carnes2.jpg", import.meta.url).href;
-const carnes3Image = new URL("../../imagenes/carnes3.jpg", import.meta.url).href;
-const carnes4Image = new URL("../../imagenes/carnes4.jpg", import.meta.url).href;
-const carnes5Image = new URL("../../imagenes/carnes5.jpg", import.meta.url).href;
-const carnes6Image = new URL("../../imagenes/carnes6.jpg", import.meta.url).href;
+/* ==========================================================================
+   IMPORTACIÓN DE IMÁGENES DESDE LA CARPETA
+   ========================================================================== */
 
-const coctel1Image = new URL("../../imagenes/coctel1.jpg", import.meta.url).href;
-const coctel2Image = new URL("../../imagenes/coctel2.jpg", import.meta.url).href;
-const coctel3Image = new URL("../../imagenes/coctel3.jpg", import.meta.url).href;
-const coctel4Image = new URL("../../imagenes/coctel4.jpg", import.meta.url).href;
-const coctel5Image = new URL("../../imagenes/coctel5.jpg", import.meta.url).href;
-const coctel6Image = new URL("../../imagenes/coctel6.jpg", import.meta.url).href;
-const coctel7Image = new URL("../../imagenes/coctel7.jpg", import.meta.url).href;
-const coctel8Image = new URL("../../imagenes/coctel8.jpg", import.meta.url).href;
-const coctel9Image = new URL("../../imagenes/coctel9.jpg", import.meta.url).href;
-const coctel10Image = new URL("../../imagenes/coctel10.jpg", import.meta.url).href;
+// Botellas y Licores
+const bo1Image = new URL("../../imagenes/bo1.jpg", import.meta.url).href; // Jägermeister
+const bo2Image = new URL("../../imagenes/bo2.jpg", import.meta.url).href; // Tequila Jose Cuervo
+const bo3Image = new URL("../../imagenes/bo3.jpg", import.meta.url).href; // Gin La República
+const bo4Image = new URL("../../imagenes/bo4.jpg", import.meta.url).href; // Fernet Branca
+const bo5Image = new URL("../../imagenes/bo5.webp", import.meta.url).href; // Ron Havana / Fernet
+const bo6Image = new URL("../../imagenes/bo6.jpg", import.meta.url).href; // Casa Real
 
-const ga1Image = new URL("../../imagenes/ga1.jpg", import.meta.url).href;
-const natu2Image = new URL("../../imagenes/natu2.jpg", import.meta.url).href;
-const rock1Image = new URL("../../imagenes/rock1.jpg", import.meta.url).href;
-const piqueo3Image = new URL("../../imagenes/piqueo3.jpg", import.meta.url).href;
-const ciga1Image = new URL("../../imagenes/ciga1.webp", import.meta.url).href;
-const promoCervezaImage = new URL("../../imagenes/balde-corona.webp", import.meta.url).href;
+// Comidas / Carnes / Piqueos
+const carnes1Image = new URL("../../imagenes/carnes1.jpg", import.meta.url).href; // Pique Rústico
+const carnes2Image = new URL("../../imagenes/carnes2.jpg", import.meta.url).href; // Piqueo Munich
+const carnes3Image = new URL("../../imagenes/carnes3.jpg", import.meta.url).href; // Tabla de Giba
+const carnes4Image = new URL("../../imagenes/carnes4.jpg", import.meta.url).href; // Tabla de Picaña
+const carnes5Image = new URL("../../imagenes/carnes5.jpg", import.meta.url).href; // Tabla Bife de Chorizo
+const carnes6Image = new URL("../../imagenes/carnes6.jpg", import.meta.url).href; // Nachos / Piqueo
+const papajamonImage = new URL("../../imagenes/papajamon.jpg", import.meta.url).href; // Papas jamón y queso
+const pajamoImage = new URL("../../imagenes/pajamo.jpg", import.meta.url).href; // Salchihaus / Papas cheddar
 
-const paulinerImage = new URL("../../imagenes/pauliner.jpg", import.meta.url).href;
+// Cigarros
+const ciga1Image = new URL("../../imagenes/ciga1.webp", import.meta.url).href; // Winston
+const ciga2Image = new URL("../../imagenes/ciga2.webp", import.meta.url).href; // Bohem
+
+// Cócteles
+const coctel1Image = new URL("../../imagenes/coctel1.jpg", import.meta.url).href; // Cuba Libre
+const coctel2Image = new URL("../../imagenes/coctel2.jpg", import.meta.url).href; // Fernet
+const coctel3Image = new URL("../../imagenes/coctel3.jpg", import.meta.url).href; // Chuflay
+const coctel4Image = new URL("../../imagenes/coctel4.jpg", import.meta.url).href; // Tequila Sunrise
+const coctel5Image = new URL("../../imagenes/coctel5.jpg", import.meta.url).href; // Wisky a las rocas
+const coctel6Image = new URL("../../imagenes/coctel6.jpg", import.meta.url).href; // Piña Colada
+const coctel7Image = new URL("../../imagenes/coctel7.jpg", import.meta.url).href; // Caipiriña
+const coctel8Image = new URL("../../imagenes/coctel8.jpg", import.meta.url).href; // Daiquiri
+const coctel9Image = new URL("../../imagenes/coctel9.jpg", import.meta.url).href; // Gin Tonic Frutos Rojos
+const coctel10Image = new URL("../../imagenes/coctel10.jpg", import.meta.url).href; // Gin Tonic
+
+// Cervezas Industriales y Baldes
 const coronaImage = new URL("../../imagenes/corona.jpg", import.meta.url).href;
+const baldeCoronaImage = new URL("../../imagenes/balde-corona.webp", import.meta.url).href;
+const paulanerImage = new URL("../../imagenes/paulaner.jpg", import.meta.url).href;
+const prostImage = new URL("../../imagenes/prost.jpg", import.meta.url).href;
 const heinekenImage = new URL("../../imagenes/heineken.jpg", import.meta.url).href;
 const heinekenSixImage = new URL("../../imagenes/heineken six.jpg", import.meta.url).href;
-const prostImage = new URL("../../imagenes/prost.jpg", import.meta.url).href;
+
+// Gaseosas y Refrescos Naturales
+const ga1Image = new URL("../../imagenes/ga1.jpg", import.meta.url).href; // Coca Cola / Fanta / Sprite 500ml
+const ga2Image = new URL("../../imagenes/ga2.jpg", import.meta.url).href; // Gaseosas variadas
+const ga3Image = new URL("../../imagenes/ga3.webp", import.meta.url).href; // Agua Vital
+const ga4Image = new URL("../../imagenes/ga4.jpg", import.meta.url).href; // Coca Cola 1L
+const natu1Image = new URL("../../imagenes/natu1.jpg", import.meta.url).href; // Jugo Natural Normal
+const natu2Image = new URL("../../imagenes/natu2.jpg", import.meta.url).href; // Jugo Frapeado
+
+// Rock & Wings
+const rock1Image = new URL("../../imagenes/rock1.jpg", import.meta.url).href; // Alitas
+const rock2Image = new URL("../../imagenes/rock2.jpg", import.meta.url).href; // Alitas Bañadas
+const rock3Image = new URL("../../imagenes/rock3.jpg", import.meta.url).href; // Tenders
+
+// Vinos
+const vi1Image = new URL("../../imagenes/vi1.jpg", import.meta.url).href; // Vino Tinto
+const vi2Image = new URL("../../imagenes/vi2.jpg", import.meta.url).href; // Vino Blanco
+const vi3Image = new URL("../../imagenes/vi3.jpg", import.meta.url).href; // Vino Rosé
+const vi4Image = new URL("../../imagenes/vi4.webp", import.meta.url).href; // Vino Rosé Semidulce
 
 /* ==========================================================================
-   Menú semilla — migrado 1:1 con todas las categorías y productos
+   MENÚ SEMILLA COMPLETO (Sincronizado 1:1 con las capturas de pantalla)
    ========================================================================== */
 export const MENU_SEED: Producto[] = [
-  // --- Comidas: Piqueo ---
-  { id: "p1", subcategoria: "Piqueo", nombre: "Papas con jamón y queso", categoria: "Comidas", precio: 30, icon: "papas", imagen: papasJamonImage, descripcion: "Crujientes papas fritas acompañadas de trocitos de jamón y una deliciosa capa de queso fundido." },
-  { id: "p2", subcategoria: "Piqueo", nombre: "Papas con queso cheddar y tocino", categoria: "Comidas", precio: 30, icon: "papas", imagen: pashaMoImage, descripcion: "Deliciosas papas fritas doradas cubiertas con cremosa salsa de queso cheddar y crujientes trocitos de tocino." },
+  // ------------------ COMIDAS: PIQUEO ------------------
+  { id: "p1", subcategoria: "Piqueo", nombre: "Papas con jamón y queso", categoria: "Comidas", precio: 30, icon: "papas", imagen: papajamonImage, descripcion: "Crujientes papas fritas acompañadas de trocitos de jamón y una deliciosa capa de queso fundido." },
+  { id: "p2", subcategoria: "Piqueo", nombre: "Papas con queso cheddar y tocino", categoria: "Comidas", precio: 30, icon: "papas", imagen: pajamoImage, descripcion: "Deliciosas papas fritas doradas cubiertas con cremosa salsa de queso cheddar y crujientes trocitos de tocino." },
   { id: "p3", subcategoria: "Piqueo", nombre: "Nachos", categoria: "Comidas", precio: 25, icon: "pizza", imagen: carnes6Image, descripcion: "Crujientes totopos de maíz, ideales para picar y compartir." },
-  
-  // --- Comidas: Carnes ---
-  { id: "p4", subcategoria: "Carnes", nombre: "Piqueo Munich", categoria: "Comidas", precio: 89, icon: "plate", imagen: carnes2Image, descripcion: "Piqueo abundante para compartir, preparado con una variedad de carnes, salchichas, papas fritas y salsas para acompañar." },
-  { id: "p5", subcategoria: "Carnes", nombre: "Pique Rústico — Entero", categoria: "Comidas", precio: 100, icon: "plate", imagen: carnes1Image, descripcion: "Delicioso pique rústico preparado con jugosos trozos de carne, papas doradas, chorizo y salchichas." },
-  { id: "p6", subcategoria: "Carnes", nombre: "Pique Rústico — Medio", categoria: "Comidas", precio: 60, icon: "plate", imagen: carnes1Image, descripcion: "Delicioso pique rústico preparado con jugosos trozos de carne, papas doradas, chorizo y salchichas (porción mediana)." },
-  { id: "p7", subcategoria: "Carnes", nombre: "Tabla de Giba", categoria: "Comidas", precio: 75, icon: "plate", imagen: carnes3Image, descripcion: "Tabla de giba preparada a la parrilla, servida en porciones y acompañada de guarniciones y salsas." },
-  { id: "p8", subcategoria: "Carnes", nombre: "Tabla de Picaña", categoria: "Comidas", precio: 75, icon: "plate", imagen: carnes4Image, descripcion: "Picaña de res preparada a la parrilla y cortada en porciones, servida con guarniciones y salsas." },
-  { id: "p9", subcategoria: "Carnes", nombre: "Tabla de Bife de Chorizo", categoria: "Comidas", precio: 75, icon: "plate", imagen: carnes5Image, descripcion: "Bife de chorizo de res cocinado a la parrilla y servido en una tabla, con guarniciones y salsas." },
-  { id: "p10", subcategoria: "Carnes", nombre: "Salchihaus — Medio", categoria: "Comidas", precio: 35, icon: "plate", imagen: papasJamonImage, descripcion: "Deliciosa salchipapa preparada con crujientes papas fritas y salchichas doradas (porción mediana)." },
-  { id: "p11", subcategoria: "Carnes", nombre: "Salchihaus — Entero", categoria: "Comidas", precio: 60, icon: "plate", imagen: papasJamonImage, descripcion: "Deliciosa salchipapa preparada con crujientes papas fritas y salchichas doradas (porción entera)." },
 
-  // --- Cócteles: Clásicos ---
-  { id: "p12", subcategoria: "Clásicos", nombre: "Cuba Libre", categoria: "Cócteles", precio: 30, icon: "coctel", imagen: coctel1Image, descripcion: "Refrescante cóctel preparado con ron, bebida de cola, hielo y un toque de limón." },
-  { id: "p13", subcategoria: "Clásicos", nombre: "Fernet", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel2Image, descripcion: "Cóctel de sabor intenso y herbal, preparado tradicionalmente con fernet, bebida de cola y hielo." },
-  { id: "p14", subcategoria: "Clásicos", nombre: "Chuflay", categoria: "Cócteles", precio: 25, icon: "coctel", imagen: coctel3Image, descripcion: "Cóctel tradicional boliviano elaborado con singani, ginger ale, hielo y limón." },
-  { id: "p15", subcategoria: "Clásicos", nombre: "Tequila Sunrise", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel4Image, descripcion: "Colorido cóctel preparado tradicionalmente con tequila, jugo de naranja y granadina." },
-  { id: "p16", subcategoria: "Clásicos", nombre: "Wisky a las rocas", categoria: "Cócteles", precio: 30, icon: "coctel", imagen: coctel5Image, descripcion: "Wisky servido con cubos de hielo para disfrutar lentamente de su aroma y notas amaderadas." },
+  // ------------------ COMIDAS: CARNES ------------------
+  { id: "p4", subcategoria: "Carnes", nombre: "Piqueo Munich", categoria: "Comidas", precio: 89, icon: "plate", imagen: carnes2Image, descripcion: "Piqueo abundante para compartir, preparado con una variedad de carnes, salchichas, papas fritas y salsas para acompañar. Ideal para disfrutar entre amigos en un ambiente cervecero." },
+  { id: "p5", subcategoria: "Carnes", nombre: "Pique Rústico — Entero", categoria: "Comidas", precio: 100, icon: "plate", imagen: carnes1Image, descripcion: "Delicioso pique rústico preparado con jugosos trozos de carne, papas doradas, chorizo y salchichas, acompañado de salsas que realzan cada bocado." },
+  { id: "p6", subcategoria: "Carnes", nombre: "Pique Rústico — Medio", categoria: "Comidas", precio: 60, icon: "plate", imagen: carnes1Image, descripcion: "Delicioso pique rústico preparado con jugosos trozos de carne, papas doradas, chorizo y salchichas, acompañado de salsas que realzan cada bocado." },
+  { id: "p7", subcategoria: "Carnes", nombre: "Tabla de Giba", categoria: "Comidas", precio: 75, icon: "plate", imagen: carnes3Image, descripcion: "Tabla de giba preparada a la parrilla, servida en porciones y acompañada de guarniciones y salsas. Una opción ideal para los amantes de la carne asada." },
+  { id: "p8", subcategoria: "Carnes", nombre: "Tabla de Picaña", categoria: "Comidas", precio: 75, icon: "plate", imagen: carnes4Image, descripcion: "Picaña de res preparada a la parrilla y cortada en porciones, servida con guarniciones y salsas para acompañar." },
+  { id: "p9", subcategoria: "Carnes", nombre: "Tabla de Bife de Chorizo", categoria: "Comidas", precio: 75, icon: "plate", imagen: carnes5Image, descripcion: "Bife de chorizo de res cocinado a la parrilla y servido en una tabla, con guarniciones y salsas para complementar su sabor." },
+  { id: "p10", subcategoria: "Carnes", nombre: "Salchihaus - Medio", categoria: "Comidas", precio: 35, icon: "plate", imagen: pajamoImage, descripcion: "Deliciosa salchipapa preparada con crujientes papas fritas y salchichas doradas, acompañadas de salsas que realzan su sabor." },
+  { id: "p11", subcategoria: "Carnes", nombre: "Salchihaus - Entero", categoria: "Comidas", precio: 60, icon: "plate", imagen: pajamoImage, descripcion: "Deliciosa salchipapa preparada con crujientes papas fritas y salchichas doradas, acompañadas de salsas que realzan su sabor." },
 
-  // --- Cócteles: Especiales ---
-  { id: "p17", subcategoria: "Especiales", nombre: "Piña Colada", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel6Image, descripcion: "Cóctel tropical cremoso preparado tradicionalmente con piña, crema o leche de coco y ron." },
-  { id: "p18", subcategoria: "Especiales", nombre: "Caipiriña", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel7Image, descripcion: "Cóctel de origen brasileño preparado tradicionalmente con cachaça, limón verde, azúcar y hielo." },
-  { id: "p19", subcategoria: "Especiales", nombre: "Daiquiri", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel8Image, descripcion: "Cóctel de inspiración caribeña elaborado tradicionalmente con ron, jugo de limón y azúcar." },
-  { id: "p20", subcategoria: "Especiales", nombre: "Gin Tonic de Frutos Rojos", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel9Image, descripcion: "Cóctel preparado tradicionalmente con ginebra, agua tónica y frutos rojos." },
-  { id: "p21", subcategoria: "Especiales", nombre: "Gin Tonic", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel10Image, descripcion: "Cóctel clásico preparado con ginebra, agua tónica, hielo y un toque cítrico." },
+  // ------------------ CÓCTELES: CLÁSICOS ------------------
+  { id: "p12", subcategoria: "Clásicos", nombre: "Cuba Libre", categoria: "Cócteles", precio: 30, icon: "coctel", imagen: coctel1Image, descripcion: "Refrescante cóctel preparado con ron, bebida de cola, hielo y un toque de limón. Una combinación clásica, cítrica y perfecta para disfrutar bien frío." },
+  { id: "p13", subcategoria: "Clásicos", nombre: "Fernet", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel2Image, descripcion: "Cóctel de sabor intenso y herbal, preparado tradicionalmente con fernet, bebida de cola y hielo. Ideal para quienes disfrutan de sabores marcados y refrescantes." },
+  { id: "p14", subcategoria: "Clásicos", nombre: "Chuflay", categoria: "Cócteles", precio: 25, icon: "coctel", imagen: coctel3Image, descripcion: "Cóctel tradicional boliviano elaborado con singani, ginger ale, hielo y limón. Ligero, burbujeante y con un agradable equilibrio entre notas cítricas y dulces." },
+  { id: "p15", subcategoria: "Clásicos", nombre: "Tequila Sunrise", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel4Image, descripcion: "Colorido cóctel preparado tradicionalmente con tequila, jugo de naranja y granadina. Destaca por sus tonos degradados y su combinación de sabores cítricos y dulces." },
+  { id: "p16", subcategoria: "Clásicos", nombre: "Wisky a las rocas", categoria: "Cócteles", precio: 30, icon: "coctel", imagen: coctel5Image, descripcion: "Whisky servido con cubos de hielo para disfrutar lentamente de su aroma, sus notas amaderadas y su sabor característico." },
 
-  // --- Cerveza (Industrial / Botellas) ---
-  { id: "p22", subcategoria: "Cerveza Industrial", nombre: "Paulaner", categoria: "Cerveza", precio: 45, icon: "cerveza", imagen: paulinerImage, descripcion: "Cerveza importada de alta calidad (variedades Weissbier, Dunkel y Lemon Radler)." },
-  { id: "p23", subcategoria: "Cerveza Industrial", nombre: "Corona", categoria: "Cerveza", precio: 30, icon: "cerveza", imagen: coronaImage, descripcion: "Cerveza importada en botella individual." },
-  { id: "p24", subcategoria: "Cerveza Industrial", nombre: "Balde de Corona", categoria: "Cerveza", precio: 150, icon: "cerveza", imagen: promoCervezaImage, descripcion: "Balde con selección de cervezas Corona en hielo." },
-  { id: "p25", subcategoria: "Cerveza Industrial", nombre: "Prost", categoria: "Cerveza", precio: 40, icon: "cerveza", imagen: prostImage, descripcion: "Cerveza artesanal en botella." },
-  { id: "p26", subcategoria: "Cerveza Industrial", nombre: "Heineken", categoria: "Cerveza", precio: 30, icon: "cerveza", imagen: heinekenImage, descripcion: "Cerveza Heineken en botella individual." },
-  { id: "p27", subcategoria: "Cerveza Industrial", nombre: "Heineken 6 Pack", categoria: "Cerveza", precio: 150, icon: "cerveza", imagen: heinekenSixImage, descripcion: "Pack de 6 unidades de cerveza Heineken." },
+  // ------------------ CÓCTELES: ESPECIALES ------------------
+  { id: "p17", subcategoria: "Especiales", nombre: "Piña Colada", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel6Image, descripcion: "Cóctel tropical cremoso preparado tradicionalmente con piña, crema o leche de coco y ron. Su textura suave y su sabor dulce evocan una refrescante combinación de frutas tropicales." },
+  { id: "p18", subcategoria: "Especiales", nombre: "Caipiriña", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel7Image, descripcion: "Cóctel de origen brasileño preparado tradicionalmente con cachaça, limón verde, azúcar y hielo. Ofrece un perfil cítrico, dulce y refrescante." },
+  { id: "p19", subcategoria: "Especiales", nombre: "Daiquiri", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel8Image, descripcion: "Cóctel de inspiración caribeña elaborado tradicionalmente con ron, jugo de limón y azúcar. Su sabor combina notas cítricas y dulces." },
+  { id: "p20", subcategoria: "Especiales", nombre: "Gin Tonic de Frutos Rojos", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel9Image, descripcion: "Cóctel preparado tradicionalmente con ginebra, agua tónica y frutos rojos que aportan notas frutales y un toque de acidez." },
+  { id: "p21", subcategoria: "Especiales", nombre: "Gin Tonic", categoria: "Cócteles", precio: 35, icon: "coctel", imagen: coctel10Image, descripcion: "Cóctel clásico preparado con ginebra, agua tónica, hielo y un toque cítrico. Destaca por su frescura, sus notas botánicas y su característico equilibrio." },
 
-  // --- Refrescos y Otros ---
-  { id: "p28", subcategoria: "Gaseosas", nombre: "Refresco", categoria: "Refrescos", precio: 10, icon: "soda", imagen: ga1Image, descripcion: "Línea de gaseosas heladas, sabor a elección." },
-  { id: "p29", subcategoria: "Naturales", nombre: "Limonada de la Casa", categoria: "Refrescos", precio: 12, icon: "soda", imagen: natu2Image, descripcion: "Limonada natural con un toque de hierbabuena." },
-  
-  // --- Rock & Wings ---
-  { id: "p30", nombre: "Alitas Rock & Wings", categoria: "Rock & Wings", precio: 38, icon: "wings", imagen: rock1Image, descripcion: "8 alitas al estilo Rock & Wings, elige tu salsa: BBQ, picante o miel mostaza." },
-  { id: "p31", nombre: "Pipocas de Pollo", categoria: "Rock & Wings", precio: 28, icon: "wings", imagen: piqueo3Image, descripcion: "Popcorn chicken crocante, bañado en la salsa de la casa Rock & Wings." },
-  { id: "p32", subcategoria: "Cigarrillos", nombre: "Cajetilla de cigarrillos", categoria: "Refrescos", precio: 30, icon: "cigarrillos", imagen: ciga1Image, descripcion: "Cajetilla de cigarrillos." },
+  // ------------------ CERVEZA INDUSTRIAL ------------------
+  { id: "p22", subcategoria: "Cerveza industrial", nombre: "Paulaner", categoria: "Cerveza", precio: 45, icon: "cerveza", imagen: paulanerImage, descripcion: "Cerveza importada de alta calidad (variedades Weissbier, Dunkel y Lemon Radler)." },
+  { id: "p23", subcategoria: "Cerveza industrial", nombre: "Corona", categoria: "Cerveza", precio: 30, icon: "cerveza", imagen: coronaImage, descripcion: "Cerveza importada en botella individual." },
+  { id: "p24", subcategoria: "Cerveza industrial", nombre: "Balde de Corona", categoria: "Cerveza", precio: 150, icon: "cerveza", imagen: baldeCoronaImage, descripcion: "Balde con selección de cervezas Corona en hielo." },
+  { id: "p25", subcategoria: "Cerveza industrial", nombre: "Prost", categoria: "Cerveza", precio: 40, icon: "cerveza", imagen: prostImage, descripcion: "Cerveza artesanal en botella." },
+  { id: "p26", subcategoria: "Cerveza industrial", nombre: "Heineken", categoria: "Cerveza", precio: 30, icon: "cerveza", imagen: heinekenImage, descripcion: "Cerveza Heineken en botella individual." },
+  { id: "p27", subcategoria: "Cerveza industrial", nombre: "Heineken 6 Pack", categoria: "Cerveza", precio: 150, icon: "cerveza", imagen: heinekenSixImage, descripcion: "Pack de 6 unidades de cerveza Heineken." },
+
+  // ------------------ BOTELLAS: COMBO EN BOTELLA ------------------
+  { id: "p28", subcategoria: "Combo en botella", nombre: "Jägermeister", categoria: "Botellas", precio: 300, icon: "cerveza", imagen: bo1Image, descripcion: "Botella de licor Jägermeister." },
+  { id: "p29", subcategoria: "Combo en botella", nombre: "Tequila Jose Cuervo", categoria: "Botellas", precio: 299, icon: "cerveza", imagen: bo2Image, descripcion: "Botella de Tequila Jose Cuervo Especial." },
+  { id: "p30", subcategoria: "Combo en botella", nombre: "Gin La República", categoria: "Botellas", precio: 290, icon: "cerveza", imagen: bo3Image, descripcion: "Botella de Gin La República." },
+  { id: "p31", subcategoria: "Combo en botella", nombre: "Fernet Branca", categoria: "Botellas", precio: 300, icon: "cerveza", imagen: bo4Image, descripcion: "Botella de Fernet Branca." },
+  { id: "p32", subcategoria: "Combo en botella", nombre: "Botella de Fernet Branca.", categoria: "Botellas", precio: 300, icon: "cerveza", imagen: bo5Image, descripcion: "Botella de Ron Havana Club Reserva." },
+  { id: "p33", subcategoria: "Combo en botella", nombre: "Casa Real Etiqueta Negra", categoria: "Botellas", precio: 280, icon: "cerveza", imagen: bo6Image, descripcion: "Botella de singani Casa Real Etiqueta Negra." },
+
+  // ------------------ BOTELLAS: VINOS ------------------
+  { id: "p34", subcategoria: "Vinos", nombre: "Vino Tinto (Campos de Solana)", categoria: "Botellas", precio: 55, icon: "cerveza", imagen: vi1Image, descripcion: "Botella de vino tinto." },
+  { id: "p35", subcategoria: "Vinos", nombre: "Vino Blanco (Campos de Solana)", categoria: "Botellas", precio: 55, icon: "cerveza", imagen: vi2Image, descripcion: "Botella de vino blanco." },
+  { id: "p36", subcategoria: "Vinos", nombre: "Vino Rosé", categoria: "Botellas", precio: 95, icon: "cerveza", imagen: vi3Image, descripcion: "Botella de vino rosado." },
+  { id: "p37", subcategoria: "Vinos", nombre: "Vino Rosé Semidulce", categoria: "Botellas", precio: 65, icon: "cerveza", imagen: vi4Image, descripcion: "Botella de vino rosado semidulce." },
+
+  // ------------------ REFRESCOS: NATURALES ------------------
+  { id: "p38", subcategoria: "Naturales", nombre: "Jugo Natural - Normal", categoria: "Refrescos", precio: 12, icon: "soda", imagen: natu1Image, descripcion: "Jugo natural preparación normal (Sabores: Limonada, Frutilla, Piña, Maracuyá, Frutos Rojos)." },
+  { id: "p39", subcategoria: "Naturales", nombre: "Jugo Natural (Frapeado)", categoria: "Refrescos", precio: 20, icon: "soda", imagen: natu2Image, descripcion: "Jugo natural preparación frapeada/hielo licuado (Sabores: Limonada, Frutilla, Piña, Maracuyá, Frutos Rojos)." },
+
+  // ------------------ REFRESCOS: GASEOSAS ------------------
+  { id: "p40", subcategoria: "Gaseosas", nombre: "Gaseosa 500ml (Coca Cola / Zero / Sprite / Fanta)", categoria: "Refrescos", precio: 12, icon: "soda", imagen: ga1Image, descripcion: "Gaseosa personal de 500ml (opciones: Coca Cola, Coca Cola Zero, Sprite, Fanta)." },
+  { id: "p41", subcategoria: "Gaseosas", nombre: "Agua Vital 500ml", categoria: "Refrescos", precio: 6, icon: "soda", imagen: ga3Image, descripcion: "Botella de agua de 500ml." },
+  { id: "p42", subcategoria: "Gaseosas", nombre: "Gaseosa 1L (Coca Cola / Sprite)", categoria: "Refrescos", precio: 20, icon: "soda", imagen: ga4Image, descripcion: "Botella de gaseosa de 1 Litro (Coca Cola o Sprite)." },
+
+  // ------------------ CIGARRILLOS ------------------
+  { id: "p43", subcategoria: "Cigarrillos", nombre: "Cigarros Winston", categoria: "Refrescos", precio: 30, icon: "cigarrillos", imagen: ciga1Image, descripcion: "Cajetilla de cigarros Winston." },
+  { id: "p44", subcategoria: "Cigarrillos", nombre: "Cigarros Bohem", categoria: "Refrescos", precio: 30, icon: "cigarrillos", imagen: ciga2Image, descripcion: "Cajetilla de cigarros Bohem." },
+
+  // ------------------ ROCK & WINGS ------------------
+  { id: "p45", nombre: "Alitas - 6 piezas", categoria: "Rock & Wings", precio: 35, icon: "wings", imagen: rock1Image, descripcion: "6 Piezas incluye papas y salsa." },
+  { id: "p46", nombre: "Alitas - 12 piezas", categoria: "Rock & Wings", precio: 65, icon: "wings", imagen: rock1Image, descripcion: "12 Piezas incluye papas y salsa." },
+  { id: "p47", nombre: "Alitas Bañadas - 6 piezas", categoria: "Rock & Wings", precio: 40, icon: "wings", imagen: rock2Image, descripcion: "6 Piezas bañadas con salsa incluye papas." },
+  { id: "p48", nombre: "Alitas Bañadas - 12 piezas", categoria: "Rock & Wings", precio: 70, icon: "wings", imagen: rock2Image, descripcion: "12 Piezas bañadas con salsa incluye papas." },
+  { id: "p49", nombre: "Tenders", categoria: "Rock & Wings", precio: 35, icon: "wings", imagen: rock3Image, descripcion: "6 Filetes de pecho, papas + salsas." },
 ];
 
 export const CATEGORIA_ICONS: Record<string, string> = {
@@ -112,8 +168,8 @@ export const BARRILES: Barril[] = [
 ];
 
 export const PROMOCIONES_SEED: Promocion[] = [
-  { id: "promo1", titulo: "2x1 en Cerveza Rubia", descripcion: "Pide una cerveza rubia de 500ml y la segunda va por la casa.", categoria: "Cerveza", precio: 22, imagen: promoCervezaImage, vigencia: "Hoy de 18:00 a 21:00", activa: true },
-  { id: "promo2", titulo: "Combo Haus", descripcion: "Hamburguesa Haus + papas especiales + refresco a elección.", categoria: "Comidas", precio: 65, imagen: papasJamonImage, vigencia: "Hoy", activa: true },
+  { id: "promo1", titulo: "2x1 en Cerveza Rubia", descripcion: "Pide una cerveza rubia de 500ml y la segunda va por la casa.", categoria: "Cerveza", precio: 22, imagen: baldeCoronaImage, vigencia: "Hoy de 18:00 a 21:00", activa: true },
+  { id: "promo2", titulo: "Combo Haus", descripcion: "Hamburguesa Haus + papas especiales + refresco a elección.", categoria: "Comidas", precio: 65, imagen: papajamonImage, vigencia: "Hoy", activa: true },
 ];
 
 export function formatHora(d: Date): string {
@@ -124,7 +180,7 @@ export function minutosDesde(ts: number): number {
   return Math.max(0, Math.round((Date.now() - ts) / 60000));
 }
 
-/** Base de datos de demostración — sincronizada con el sistema. */
+/** Base de datos de demostración — sincronizada completamente con la plataforma. */
 export function seedDB(): DB {
   const now = Date.now();
   const haceMin = (m: number) => now - m * 60000;
@@ -146,21 +202,21 @@ export function seedDB(): DB {
     ],
     pedidos: [
       { id: 101, mesa: 3, mesero: "Carlos", estado: "preparando", items: [{ nombre: "Piqueo Munich", cant: 1, precio: 89 }, { nombre: "Cuba Libre", cant: 2, precio: 30 }], hora: formatHora(new Date(haceMin(20))), ts: haceMin(20), total: 149 },
-      { id: 102, mesa: 5, mesero: "Carlos", estado: "entregado", items: [{ nombre: "Tabla de Picaña", cant: 1, precio: 75 }, { nombre: "Refresco", cant: 2, precio: 10 }], hora: formatHora(new Date(haceMin(35))), ts: haceMin(35), total: 95 },
-      { id: 103, mesa: 2, mesero: "Carlos", estado: "pendiente", items: [{ nombre: "Alitas Rock & Wings", cant: 2, precio: 38 }, { nombre: "Paulaner", cant: 2, precio: 45 }], hora: formatHora(new Date(haceMin(6))), ts: haceMin(6), total: 166 },
+      { id: 102, mesa: 5, mesero: "Carlos", estado: "entregado", items: [{ nombre: "Tabla de Picaña", cant: 1, precio: 75 }, { nombre: "Gaseosa 500ml (Coca Cola / Zero / Sprite / Fanta)", cant: 2, precio: 12 }], hora: formatHora(new Date(haceMin(35))), ts: haceMin(35), total: 99 },
+      { id: 103, mesa: 2, mesero: "Carlos", estado: "pendiente", items: [{ nombre: "Alitas - 12 piezas", cant: 1, precio: 65 }, { nombre: "Paulaner", cant: 2, precio: 45 }], hora: formatHora(new Date(haceMin(6))), ts: haceMin(6), total: 155 },
       { id: 104, mesa: 8, mesero: "Carlos", estado: "listo", items: [{ nombre: "Papas con jamón y queso", cant: 2, precio: 30 }, { nombre: "Piña Colada", cant: 2, precio: 35 }], hora: formatHora(new Date(haceMin(3))), ts: haceMin(3), total: 130 },
     ],
     ventas: [
       { id: 1, mesa: 4, mesero: "Carlos", items: [{ nombre: "Pique Rústico — Medio", cant: 1 }, { nombre: "Corona", cant: 2 }], subtotal: 120, propina: 10, metodoPago: "efectivo", calificacion: 5, hora: formatHora(new Date(haceMin(240))), ts: haceMin(240) },
-      { id: 2, mesa: 6, mesero: "Ana", items: [{ nombre: "Nachos", cant: 1 }, { nombre: "Refresco", cant: 2 }], subtotal: 45, propina: 8, metodoPago: "qr", calificacion: 5, hora: formatHora(new Date(haceMin(210))), ts: haceMin(210) },
-      { id: 3, mesa: 1, mesero: "Luis", items: [{ nombre: "Alitas Rock & Wings", cant: 2 }, { nombre: "Heineken", cant: 2 }], subtotal: 136, propina: 12, metodoPago: "qr", calificacion: 4, hora: formatHora(new Date(haceMin(190))), ts: haceMin(190) },
+      { id: 2, mesa: 6, mesero: "Ana", items: [{ nombre: "Nachos", cant: 1 }, { nombre: "Jugo Natural - Normal", cant: 2 }], subtotal: 49, propina: 8, metodoPago: "qr", calificacion: 5, hora: formatHora(new Date(haceMin(210))), ts: haceMin(210) },
+      { id: 3, mesa: 1, mesero: "Luis", items: [{ nombre: "Alitas - 6 piezas", cant: 2 }, { nombre: "Heineken", cant: 2 }], subtotal: 130, propina: 12, metodoPago: "qr", calificacion: 4, hora: formatHora(new Date(haceMin(190))), ts: haceMin(190) },
       { id: 4, mesa: 7, mesero: "Ana", items: [{ nombre: "Tabla de Giba", cant: 2 }], subtotal: 150, propina: 15, metodoPago: "efectivo", calificacion: 5, hora: formatHora(new Date(haceMin(160))), ts: haceMin(160) },
     ],
     productos: [
       ...MENU_SEED.map((p) => ({ ...p })),
       ...productosCervezaDeBarriles(BARRILES.map((b) => b.nombre)),
     ],
-    nextProductoId: 33,
+    nextProductoId: 50,
     promociones: PROMOCIONES_SEED.map((p) => ({ ...p })),
     nextPromocionId: 3,
     nextBarrilId: 9,
