@@ -1,70 +1,70 @@
 import type { Barril, DB, Producto, Promocion } from "../types";
 import { productosCervezaDeBarriles } from "../lib/menu";
 
-/* ==========================================================================
-   IMPORTACIÓN DE IMÁGENES DESDE LA CARPETA
-   ========================================================================== */
+const imagenPublica = (nombre: string) => `${import.meta.env.BASE_URL}imagenes/${nombre}`;
 
 // Botellas y Licores
-const bo1Image = new URL("../../imagenes/bo1.jpg", import.meta.url).href; // Jägermeister
-const bo2Image = new URL("../../imagenes/bo2.jpg", import.meta.url).href; // Tequila Jose Cuervo
-const bo3Image = new URL("../../imagenes/bo3.jpg", import.meta.url).href; // Gin La República
-const bo4Image = new URL("../../imagenes/bo4.jpg", import.meta.url).href; // Fernet Branca
-const bo5Image = new URL("../../imagenes/bo5.webp", import.meta.url).href; // Ron Havana / Fernet
-const bo6Image = new URL("../../imagenes/bo6.jpg", import.meta.url).href; // Casa Real
+const bo1Image = imagenPublica("bo1.jpg"); // Jägermeister
+const bo2Image = imagenPublica("bo2.jpg"); // Tequila Jose Cuervo
+const bo3Image = imagenPublica("bo3.jpg"); // Gin La República
+const bo4Image = imagenPublica("bo4.jpg"); // Fernet Branca
+const bo5Image = imagenPublica("bo5.webp"); // Ron Havana / Fernet
+const bo6Image = imagenPublica("bo6.jpg"); // Casa Real
 
 // Comidas / Carnes / Piqueos
-const carnes1Image = new URL("../../imagenes/carnes1.jpg", import.meta.url).href; // Pique Rústico
-const carnes2Image = new URL("../../imagenes/carnes2.jpg", import.meta.url).href; // Piqueo Munich
-const carnes3Image = new URL("../../imagenes/carnes3.jpg", import.meta.url).href; // Tabla de Giba
-const carnes4Image = new URL("../../imagenes/carnes4.jpg", import.meta.url).href; // Tabla de Picaña
-const carnes5Image = new URL("../../imagenes/carnes5.jpg", import.meta.url).href; // Tabla Bife de Chorizo
-const carnes6Image = new URL("../../imagenes/carnes6.jpg", import.meta.url).href; // Nachos / Piqueo
-const papajamonImage = new URL("../../imagenes/papajamon.jpg", import.meta.url).href; // Papas jamón y queso
-const pajamoImage = new URL("../../imagenes/pajamo.jpg", import.meta.url).href; // Salchihaus / Papas cheddar
+const carnes1Image = imagenPublica("carnes2.jpg"); // Pique Rústico
+const carnes2Image = imagenPublica("carnes1.jpg"); // Piqueo Munich
+const carnes3Image = imagenPublica("carnes3.jpg"); // Tabla de Giba
+const carnes4Image = imagenPublica("carnes4.jpg"); // Tabla de Picaña
+const carnes5Image = imagenPublica("carnes5.jpg"); // Tabla Bife de Chorizo
+const salchihauseImage = imagenPublica("carnes6.jpg"); // Salchihaus 
+const carnes6Image = imagenPublica("piqueo3.jpg"); // Nachos / Piqueo
+const papajamonImage = imagenPublica("papajamon.jpg"); // Papas jamón y queso
+const pajamoImage = imagenPublica("pajamo.jpg"); // Salchihaus / Papas cheddar
 
 // Cigarros
-const ciga1Image = new URL("../../imagenes/ciga1.webp", import.meta.url).href; // Winston
-const ciga2Image = new URL("../../imagenes/ciga2.webp", import.meta.url).href; // Bohem
+const ciga1Image = imagenPublica("ciga1.webp"); // Winston
+const ciga2Image = imagenPublica("ciga2.webp"); // Bohem
 
 // Cócteles
-const coctel1Image = new URL("../../imagenes/coctel1.jpg", import.meta.url).href; // Cuba Libre
-const coctel2Image = new URL("../../imagenes/coctel2.jpg", import.meta.url).href; // Fernet
-const coctel3Image = new URL("../../imagenes/coctel3.jpg", import.meta.url).href; // Chuflay
-const coctel4Image = new URL("../../imagenes/coctel4.jpg", import.meta.url).href; // Tequila Sunrise
-const coctel5Image = new URL("../../imagenes/coctel5.jpg", import.meta.url).href; // Wisky a las rocas
-const coctel6Image = new URL("../../imagenes/coctel6.jpg", import.meta.url).href; // Piña Colada
-const coctel7Image = new URL("../../imagenes/coctel7.jpg", import.meta.url).href; // Caipiriña
-const coctel8Image = new URL("../../imagenes/coctel8.jpg", import.meta.url).href; // Daiquiri
-const coctel9Image = new URL("../../imagenes/coctel9.jpg", import.meta.url).href; // Gin Tonic Frutos Rojos
-const coctel10Image = new URL("../../imagenes/coctel10.jpg", import.meta.url).href; // Gin Tonic
+const coctel1Image = imagenPublica("coctel1.jpg"); // Cuba Libre
+const coctel2Image = imagenPublica("coctel2.jpg"); // Fernet
+const coctel3Image = imagenPublica("coctel3.jpg"); // Chuflay
+const coctel4Image = imagenPublica("coctel4.jpg"); // Tequila Sunrise
+const coctel5Image = imagenPublica("coctel5.jpg"); // Wisky a las rocas
+const coctel6Image = imagenPublica("coctel6.jpg"); // Piña Colada
+const coctel7Image = imagenPublica("coctel7.jpg"); // Caipiriña
+const coctel8Image = imagenPublica("coctel8.jpg"); // Daiquiri
+const coctel9Image = imagenPublica("coctel9.jpg"); // Gin Tonic Frutos Rojos
+const coctel10Image = imagenPublica("coctel10.jpg"); // Gin Tonic
 
 // Cervezas Industriales y Baldes
-const coronaImage = new URL("../../imagenes/corona.jpg", import.meta.url).href;
-const baldeCoronaImage = new URL("../../imagenes/balde-corona.webp", import.meta.url).href;
-const paulanerImage = new URL("../../imagenes/paulaner.jpg", import.meta.url).href;
-const prostImage = new URL("../../imagenes/prost.jpg", import.meta.url).href;
-const heinekenImage = new URL("../../imagenes/heineken.jpg", import.meta.url).href;
-const heinekenSixImage = new URL("../../imagenes/heineken six.jpg", import.meta.url).href;
+const coronaImage = imagenPublica("corona.jpg");
+const baldeCoronaImage = imagenPublica("balde-corona.webp");
+const paulanerImage = imagenPublica("paulaner.jpg");
+const prostImage = imagenPublica("prost.jpg");
+const heinekenImage = imagenPublica("heineken.jpg");
+const heinekenSixImage = imagenPublica("heineken six.jpg");
+
 
 // Gaseosas y Refrescos Naturales
-const ga1Image = new URL("../../imagenes/ga1.jpg", import.meta.url).href; // Coca Cola / Fanta / Sprite 500ml
-const ga2Image = new URL("../../imagenes/ga2.jpg", import.meta.url).href; // Gaseosas variadas
-const ga3Image = new URL("../../imagenes/ga3.webp", import.meta.url).href; // Agua Vital
-const ga4Image = new URL("../../imagenes/ga4.jpg", import.meta.url).href; // Coca Cola 1L
-const natu1Image = new URL("../../imagenes/natu1.jpg", import.meta.url).href; // Jugo Natural Normal
-const natu2Image = new URL("../../imagenes/natu2.jpg", import.meta.url).href; // Jugo Frapeado
+const ga1Image = imagenPublica("ga1.jpg"); // Coca Cola / Fanta / Sprite 500ml
+const ga2Image = imagenPublica("ga2.jpg"); // Gaseosas variadas
+const ga3Image = imagenPublica("ga3.webp"); // Agua Vital
+const ga4Image = imagenPublica("ga4.jpg"); // Coca Cola 1L
+const natu1Image = imagenPublica("natu1.jpg"); // Jugo Natural Normal
+const natu2Image = imagenPublica("natu2.jpg"); // Jugo Frapeado
 
 // Rock & Wings
-const rock1Image = new URL("../../imagenes/rock1.jpg", import.meta.url).href; // Alitas
-const rock2Image = new URL("../../imagenes/rock2.jpg", import.meta.url).href; // Alitas Bañadas
-const rock3Image = new URL("../../imagenes/rock3.jpg", import.meta.url).href; // Tenders
+const rock1Image = imagenPublica("rock1.jpg"); // Alitas
+const rock2Image = imagenPublica("rock2.jpg"); // Alitas Bañadas
+const rock3Image = imagenPublica("rock3.jpg"); // Tenders
 
 // Vinos
-const vi1Image = new URL("../../imagenes/vi1.jpg", import.meta.url).href; // Vino Tinto
-const vi2Image = new URL("../../imagenes/vi2.jpg", import.meta.url).href; // Vino Blanco
-const vi3Image = new URL("../../imagenes/vi3.jpg", import.meta.url).href; // Vino Rosé
-const vi4Image = new URL("../../imagenes/vi4.webp", import.meta.url).href; // Vino Rosé Semidulce
+const vi1Image = imagenPublica("vi1.jpg"); // Vino Tinto
+const vi2Image = imagenPublica("vi2.jpg"); // Vino Blanco
+const vi3Image = imagenPublica("vi3.jpg"); // Vino Rosé
+const vi4Image = imagenPublica("vi4.webp"); // Vino Rosé Semidulce
 
 /* ==========================================================================
    MENÚ SEMILLA COMPLETO (Sincronizado 1:1 con las capturas de pantalla)
@@ -82,8 +82,8 @@ export const MENU_SEED: Producto[] = [
   { id: "p7", subcategoria: "Carnes", nombre: "Tabla de Giba", categoria: "Comidas", precio: 75, icon: "plate", imagen: carnes3Image, descripcion: "Tabla de giba preparada a la parrilla, servida en porciones y acompañada de guarniciones y salsas. Una opción ideal para los amantes de la carne asada." },
   { id: "p8", subcategoria: "Carnes", nombre: "Tabla de Picaña", categoria: "Comidas", precio: 75, icon: "plate", imagen: carnes4Image, descripcion: "Picaña de res preparada a la parrilla y cortada en porciones, servida con guarniciones y salsas para acompañar." },
   { id: "p9", subcategoria: "Carnes", nombre: "Tabla de Bife de Chorizo", categoria: "Comidas", precio: 75, icon: "plate", imagen: carnes5Image, descripcion: "Bife de chorizo de res cocinado a la parrilla y servido en una tabla, con guarniciones y salsas para complementar su sabor." },
-  { id: "p10", subcategoria: "Carnes", nombre: "Salchihaus - Medio", categoria: "Comidas", precio: 35, icon: "plate", imagen: pajamoImage, descripcion: "Deliciosa salchipapa preparada con crujientes papas fritas y salchichas doradas, acompañadas de salsas que realzan su sabor." },
-  { id: "p11", subcategoria: "Carnes", nombre: "Salchihaus - Entero", categoria: "Comidas", precio: 60, icon: "plate", imagen: pajamoImage, descripcion: "Deliciosa salchipapa preparada con crujientes papas fritas y salchichas doradas, acompañadas de salsas que realzan su sabor." },
+  { id: "p10", subcategoria: "Carnes", nombre: "Salchihaus - Medio", categoria: "Comidas", precio: 35, icon: "plate", imagen: salchihauseImage, descripcion: "Deliciosa salchipapa preparada con crujientes papas fritas y salchichas doradas, acompañadas de salsas que realzan su sabor." },
+  { id: "p11", subcategoria: "Carnes", nombre: "Salchihaus - Entero", categoria: "Comidas", precio: 60, icon: "plate", imagen: salchihauseImage, descripcion: "Deliciosa salchipapa preparada con crujientes papas fritas y salchichas doradas, acompañadas de salsas que realzan su sabor." },
 
   // ------------------ CÓCTELES: CLÁSICOS ------------------
   { id: "p12", subcategoria: "Clásicos", nombre: "Cuba Libre", categoria: "Cócteles", precio: 30, icon: "coctel", imagen: coctel1Image, descripcion: "Refrescante cóctel preparado con ron, bebida de cola, hielo y un toque de limón. Una combinación clásica, cítrica y perfecta para disfrutar bien frío." },

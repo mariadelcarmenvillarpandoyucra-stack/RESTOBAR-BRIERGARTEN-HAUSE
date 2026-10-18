@@ -4,5 +4,5 @@ import react from "@vitejs/plugin-react";
 // Configuración de Vite: React + TypeScript.
 export default defineConfig({
   plugins: [react()],
-  base: '/RESTOBAR-BRIERGARTEN-HAUSE/',
+  base: "/",
 })

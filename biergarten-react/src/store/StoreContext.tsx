@@ -7,7 +7,7 @@ import type {
 import { formatHora, seedDB } from "./seed";
 import { migrarDB } from "./migrations";
 
-const STORE_KEY = "biergarten_db_v2";
+const STORE_KEY = "biergarten_db_v4";
 const LITROS_POR_PRESENTACION: Record<string, number> = {
   "Chop de 350 ml": 0.35,
   "Chop de 500 ml": 0.5,
